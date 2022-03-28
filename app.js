@@ -9,7 +9,6 @@ let crypto = require('crypto');
 var app = express();
 app.use(bodyparser.json());
 app.use(cors({ origin: '*' }));
-let startTime;
 
 // Default Route
 app.get('/', (req, res) => {
