@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/getData', (req, res) => {
-    let sqlQuery = `Select * from eq`;
+    let sqlQuery = `Select * from data`;
     getResult(sqlQuery, res);
 });
 
