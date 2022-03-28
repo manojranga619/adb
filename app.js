@@ -2,11 +2,19 @@ const express = require("express");
 const cors = require('cors');
 const bodyparser = require("body-parser");
 const connection = require("./connection");
-app.post('/getQuakesByMagRange', (req, res) => {
-    let magRange1 = 1; // req.body.magRange1;
-    let magRange2 = 2;; // req.body.magRange2;
+const { Request } = require("tedious");
 
-    let sqlQuery = `Select * from eq where mag >= ${magRange1} and mag <= ${magRange2}`;
+var app = express();
+app.use(bodyparser.json());
+app.use(cors({ origin: '*' }));
+
+// Default Route
+app.get('/', (req, res) => {
+    res.send('Hello World Quiz!!!');
+});
+
+app.get('/getData', (req, res) => {
+    let sqlQuery = `Select * from eq`;
     getResult(sqlQuery, res);
 });
 
@@ -35,14 +43,7 @@ function getResult(sqlQuery, res) {
     });
    connection.execSql(request);
 }
-var app = express();
-app.use(bodyparser.json());
-app.use(cors({ origin: '*' }));
 
-// Default Route
-app.get('/', (req, res) => {
-    res.send('Hello World Quiz!!!');
-});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
